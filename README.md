@@ -1,0 +1,2 @@
+# GiovanniPython
+Esercizi
