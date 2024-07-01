@@ -19,12 +19,14 @@ class Ristorante:
         self.nome=nome
         self.tipo_cucina=tipo_cucina
     
-    def menù(self):
+    def menù_(self):
         y=input("Vuoi aggiungere piatti? si/no")
         if y=="si":
             z=input("Come si chiama il piatto?")
             c=int(input("Quanto costa?:"))
             self.menù[z]= c
+    
+    
     
     def stamp_menù(self):
         print(self.menù)
@@ -39,9 +41,11 @@ class Ristorante:
 
 ristorante1= Ristorante("Zia Bella","Casareccia")
 print(ristorante1)
-Ristorante.stato_apertura1()
-Ristorante.stato_apertura2()
-Ristorante.menù()
-Ristorante.stamp_menù()
+ristorante1.stato_apertura1()
+ristorante1.stato_apertura2()
+ristorante1.menù_()
+ristorante1.stamp_menù()
+
+
 
         
