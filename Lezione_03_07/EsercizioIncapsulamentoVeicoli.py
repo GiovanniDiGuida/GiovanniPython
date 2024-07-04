@@ -73,6 +73,7 @@ class Motocicletta(Veicolo):
             print("Esegue wheelie")
     
 class GestoreParcoVeicoli(Auto,Furgone,Motocicletta):
+    
 
     def __init__(self):
         veicoli=[]
@@ -93,17 +94,22 @@ class GestoreParcoVeicoli(Auto,Furgone,Motocicletta):
                 pass
     
     def lista_veicoli(self):
+        self.__veicoli=str(self.__veicoli)
         return ("La lista è"+self.__veicoli)
+    
+    def get_lista(self):
+        return self.__veicoli
 
 veicolo1= Auto("Fiat","Panda","2010","4 porte")
 veicolo2= Auto("Fiat","500","2005","4 porte")        
 veicolo3= Auto("Fiat","Musa","2010","4 porte") 
 
-parcoauto=GestoreParcoVeicoli
+parcoauto=GestoreParcoVeicoli()
 parcoauto.aggiungi_veicolo(veicolo1)
 parcoauto.aggiungi_veicolo(veicolo2)
 parcoauto.aggiungi_veicolo(veicolo3)
 parcoauto.lista_veicoli()
+parcoauto.get_lista()
 
         
         
