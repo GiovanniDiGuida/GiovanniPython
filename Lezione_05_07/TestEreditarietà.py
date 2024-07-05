@@ -8,6 +8,8 @@ class Animale:
     
     def mangia(self):
         print(f"{self.nome} sta mangiando.")
+    
+    
 
 
 class Cane(Animale):
@@ -18,6 +20,9 @@ class Cane(Animale):
 
     def parla(self):
         print(f"{self.nome} dice: Bau!")
+    
+    def zampe(self):
+        print(f"{self.nome} ha {self.tipo}")
 
 
 
@@ -27,6 +32,7 @@ cane = Cane("Chicca","Quattro zampe")
 
 
 cane.parla()  
-cane.mangia()  
+cane.mangia()
+cane.zampe()  
 
 
