@@ -10,12 +10,40 @@ e altezza.
 import requests
 import json
 import random
-numero=random.randint(1,1300)
+numero=random.randint(1,1002)
 pokedex= requests.get(f"https://pokeapi.co/api/v2/pokemon/{numero}").text
 dizionario_pokedex=json.loads(pokedex)
-"""for i in dizionario_pokedex["results"]:
-    print(dizionario_pokedex["results"]["nome"])"""
-"""nome=dizionario_pokedex["results"][0][""]"""
+nome= dizionario_pokedex["forms"][0]["name"]
+id=numero
+abilità=[]
+for dato in dizionario_pokedex["abilities"]:
+    nome_abilità=dato["ability"]["name"]
+    abilità.append(nome_abilità)
 
-"""print(nome)"""
-print(dizionario_pokedex)
+exp=dizionario_pokedex["base_experience"]
+altezza=dizionario_pokedex["height"]
+peso=float(dizionario_pokedex["weight"])
+    
+
+
+"""print(nome,id,abilità,exp,altezza,peso)"""
+
+pokedex={}
+id_pokemon=id
+caratteristiche={"id":id,"nome":nome,"abilita":abilità,"exp":exp,"altezza":altezza,"peso":peso}
+pokedex[id_pokemon]=[caratteristiche]
+print(pokedex)
+if pokedex=={}:
+    json2= json.dumps(pokedex)
+
+    
+    with open("pokedex.json","w") as file:
+        file.write(json2)
+        print("file creato!")
+else:
+    json2= json.dumps(pokedex)
+
+    
+    with open("pokedex.json","a") as file:
+        file.write(json2)
+        print("pokemon aggiunto")
