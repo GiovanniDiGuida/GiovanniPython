@@ -116,3 +116,7 @@ while True:
     else:
         print("Errore")
 
+
+#In Gruppo
+
+
