@@ -6,7 +6,7 @@ citta=["Napoli","Roma","Torino","Milano","Genova","Palermo","Bologna","Firenze",
 nomi=["Giovanni","Andrea","Davide","Matteo","Lorenzo","Daniele","Amalia","Antonio","Valentina","Giacomo","Teresa","Danilo","Mirko","Tommaso","Salvatore"]
 eta=nd.random.randint(18,80,size=30)
 durata_abbonamento=nd.random.randint(1,12,size=30)
-tariffa=[10,15,20,25]
+tariffa=[10,15,20,25,50,100]
 dati_consumati_GB=nd.random.randint(1,5,size=30)
 servizio_clienti=nd.random.randint(1,10,size=30)
 churn=["Si","No"]
@@ -29,7 +29,7 @@ class Operatore:
         dati={"Città": nd.random.choice(self.citta,size=30),
               "Nomi": nd.random.choice(self.nomi,size=30),
               "Età": eta,
-              "Abbonamento": durata_abbonamento,
+              "Durata_Abbonamento": durata_abbonamento,
               "Tariffa": nd.random.choice(self.tariffa,size=30),
               "GB_Usati": dati_consumati_GB,
               "Servizio_Clienti_usato":servizio_clienti,
@@ -53,18 +53,56 @@ class Operatore:
         counts1=self.trasformato.value_counts()
         print(counts1)
     
-    def
+    def pulisci_righe(self):#7 min (non ricordavo la funzione)
+        eliminato=self.trasformato.dropna()
+        print(eliminato)
+    
+    def pulisci_valori(self):#15 min non capivo cosa fare
+        pulito=self.trasformato.fillna("Vuoto")
+        print(pulito)
+    
+    def errori(self):
+        tariffa_corretta=[5,10,15,20]
+        self.trasformato[self.trasformato["Tariffa"] > 25]= nd.random.choice(tariffa_corretta)
+        print(self.trasformato)
+    
+    def costo_per_GB(self):#5 min
+        costo= self.trasformato["Tariffa"]/self.trasformato["GB_Usati"]
+        self.trasformato["Costo_per_GB"]= costo
+        print(self.trasformato)
+    
+    def groupEtà(self):#2min
+        relazione_età=self.trasformato.groupby("Età")
+        print(relazione_età)
+    
+    def groupAbbonamento(self):#1min
+        relazione_durataabbonamento=self.trasformato.groupby("Durata_Abbonamento")
+        print(relazione_durataabbonamento)
+    
+    def groupTariffa(self):#1min
+        relazione_tariffa=self.trasformato.groupby("Tariffa")
+        print(relazione_tariffa)
+    
+    def groupChurn(self):#1min
+        relazione_churn=self.trasformato.groupby("Churn")
+        print(relazione_churn)
+
+        
+
+    
+    
+
     
 
 print("Menù:")
 print("1)Carica e visualizza dati")
 print("2)Crea un file CSV con questi dati")
 print("3)Esamina la distribuzione dati")
-print("4)")
-print("5)")
-print("6)")
-print("7)")
-print("8)")
+print("4)Elimina righe con valori nulli")
+print("5)Elimina i singoli valori nulli")
+print("6)Visualizza il costo per GB")
+print("7)Visualizza la relazione tra Età, Durata_Abonnamento, Tariffa e la Churn")
+print("8)Elimina errori di Tariffa")
 print("9)Esci")
 
 
@@ -99,6 +137,64 @@ while True:
             else:
                 print("Errore")
     elif scelta=="4":
+        if operatore is None:
+            print("Devi creare prima il file")
+        else:
+            operatore.pulisci_righe()
+    elif scelta=="5":
+        if operatore is None:
+            print("Devi creare prima il file")
+        else:
+            operatore.pulisci_valori
+    elif scelta=="6":
+        if operatore is None:
+            print("Devi creare prima il file")
+        else:
+            operatore.costo_per_GB()
+    elif scelta=="7":
+        if operatore is None:
+            print("Devi creare prima il file")
+        else:
+            print("Scegli quale relazione: 1)Con Età\n 2)Con Durata Abbonamento\n 3)Con Tariffa\n 4)Con Churn\n 5)Vedi tutte le relazioni ")
+            scelta3=input("Quale relazione vuoi visualizzare?")
+            if scelta3=="1":
+                print("La relazione con Età è: ")
+                operatore.groupEtà()
+            elif scelta3=="2":
+                print("La relazione con Durata abbonamento è: ")
+                operatore.groupAbbonamento()
+            elif scelta3=="3":
+                print("La relazione con Tariffa è: ")
+                operatore.groupTariffa()
+            elif scelta3=="4":
+                print("La relazione con Churn è: ")
+                operatore.groupChurn()
+            elif scelta3=="5":
+                print("La relazione con Età è: ")
+                operatore.groupEtà()
+                print("La relazione con Durata abbonamento è: ")
+                operatore.groupAbbonamento()
+                print("La relazione con Tariffa è: ")
+                operatore.groupTariffa()
+                print("La relazione con Tariffa è: ")
+                operatore.groupTariffa()
+            else:
+                print("Errore")
+    elif scelta=="8":
+        if operatore is None:
+            print("Devi creare prima il file")
+        else:
+            operatore.errori()
+    elif scelta=="9":
+
+
+
+
+
+
+
+
+
 
             
 
