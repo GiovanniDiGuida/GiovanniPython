@@ -39,7 +39,7 @@ class Prodotto:
         print(self.unito)
     
     def pivot(self):
-        pivot_unito = self.unito.pivot_table(values='Vendite', index='Città', columns='Prodotto', aggfunc='mean')
+        pivot_unito = self.unito.pivot_table(values='Vendite', index='Città', columns='Prodotto', aggfunc='sum')
         print(pivot_unito)
 
 
