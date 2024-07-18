@@ -24,7 +24,7 @@ class Operatore:
         self.servizio_clienti=servizio_clienti
         self.churn=churn
     
-    def costruisci(self):#Creo il dizionario con i valore messi a self del costruttore(10 min)
+    def costruisci(self):#Creo il dizionario con i valore messi a self del costruttore(10 min)["Età","Durata_Abbonamento","GB_Usati","Servizio_Clienti_usato"]
 
         dati={"Città": nd.random.choice(self.citta,size=30),
               "Nomi": nd.random.choice(self.nomi,size=30),
@@ -39,6 +39,7 @@ class Operatore:
         print(self.trasformato)
     
     def creafile(self):#Funzione che ci crea il file(3 min)
+        print("File creato con successo")
         self.trasformato.to_csv("Operatore.csv")
     
     def info(self):#2 min
@@ -72,33 +73,33 @@ class Operatore:
         print(self.trasformato)
     
     def groupEtà(self):#2min
-        relazione_età=self.trasformato.groupby("Età")
+        relazione_età=self.trasformato.groupby("Età").sum()
         print(relazione_età)
     
     def groupAbbonamento(self):#1min
-        relazione_durataabbonamento=self.trasformato.groupby("Durata_Abbonamento")
+        relazione_durataabbonamento=self.trasformato.groupby("Durata_Abbonamento").sum()
         print(relazione_durataabbonamento)
     
     def groupTariffa(self):#1min
-        relazione_tariffa=self.trasformato.groupby("Tariffa")
+        relazione_tariffa=self.trasformato.groupby("Tariffa").sum()
         print(relazione_tariffa)
     
     def groupChurn(self):#1min
-        relazione_churn=self.trasformato.groupby("Churn")
+        relazione_churn=self.trasformato.groupby("Churn").sum()
         print(relazione_churn)
     
     def correlazione(self):#15 min per capire un minimo cosa sia la correlazione
-        correlazione=self.trasformato.corr()
+        correlazione=self.trasformato[['Età', 'Durata_Abbonamento', 'Tariffa', 'GB_Usati', 'Servizio_Clienti_usato']].corr()
         print("La correlazione è :")
         print(correlazione)
     
-    def correlazione_kendal(self):#15 min per capire un minimo cosa sia la correlazione
-        correlazione=self.trasformato.corr(method="kendall")
+    def correlazione_ken(self):#15 min per capire un minimo cosa sia la correlazione
+        correlazione=self.trasformato[['Età', 'Durata_Abbonamento', 'Tariffa', 'GB_Usati', 'Servizio_Clienti_usato']].corr(method="kendall")
         print("La correlazione col metodo kendal è :")
         print(correlazione)
     
     def correlazione_spearman(self):#15 min per capire un minimo cosa sia la correlazione
-        correlazione=self.trasformato.corr(method= "spearman", min_periods = 2)
+        correlazione=self.trasformato[['Età', 'Durata_Abbonamento', 'Tariffa', 'GB_Usati', 'Servizio_Clienti_usato']].corr(method= "spearman", min_periods = 2)
         print("La correlazione col metodo Spearman è :")
         print(correlazione)
     
@@ -110,8 +111,8 @@ class Operatore:
     def normalizzare(self):
         lista=["Età","Durata_Abbonamento","GB_Usati","Servizio_Clienti_usato"]
         for elemento in lista:
-            valore_minimo=self.trasformato.min()
-            valore_massimo=self.trasformato.max()
+            valore_minimo=self.trasformato[elemento].min()
+            valore_massimo=self.trasformato[elemento].max()
             self.trasformato[elemento]=(self.trasformato[elemento]- valore_minimo)/(valore_massimo-valore_minimo)
         print(self.trasformato)
 
@@ -158,7 +159,7 @@ while True:
             scelta2=input("Come vuoi esaminare i dati? info/describe/value_counts")
             if scelta2.lower()=="info":
                 print("La distribuzione dati con info è: ")
-                operatore.info
+                operatore.info()
             elif scelta2.lower()=="describe":
                 print("La distribuzione dati con describe è: ")
                 operatore.describe()
@@ -176,7 +177,7 @@ while True:
         if operatore is None:
             print("Devi creare prima il file")
         else:
-            operatore.pulisci_valori
+            operatore.pulisci_valori()
     elif scelta=="6":
         if operatore is None:
             print("Devi creare prima il file")
@@ -225,7 +226,7 @@ while True:
         if operatore is None:
             print("Devi creare prima il file")
         else:
-            operatore.correlazione_kendal()
+            operatore.correlazione_ken()
     elif scelta=="11":
         if operatore is None:
             print("Devi creare prima il file")
@@ -244,25 +245,6 @@ while True:
         
 
         
-
-
-
-
-
-
-
-
-
-
-
-
-            
-
-
-        
-#operatore=Operatore(citta,nomi,eta,durata_abbonamento,tariffa,dati_consumati_GB,servizio_clienti,churn)
-#operatore.costruisci()
-#operatore.creafile()
     
 
     
