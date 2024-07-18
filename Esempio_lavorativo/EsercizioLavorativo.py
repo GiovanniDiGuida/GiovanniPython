@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as nd
 
+
 #Qui ci sono tutte le info per creare il dizionario(15min per farlo)
 citta=["Napoli","Roma","Torino","Milano","Genova","Palermo","Bologna","Firenze","Venezia","Verona"]
 nomi=["Giovanni","Andrea","Davide","Matteo","Lorenzo","Daniele","Amalia","Antonio","Valentina","Giacomo","Teresa","Danilo","Mirko","Tommaso","Salvatore"]
@@ -94,7 +95,7 @@ class Operatore:
         print(correlazione)
     
     def correlazione_ken(self):#15 min per capire un minimo cosa sia la correlazione
-        correlazione=self.trasformato[['Età', 'Durata_Abbonamento', 'Tariffa', 'GB_Usati', 'Servizio_Clienti_usato']].corr(method="kendall")
+        correlazione=self.trasformato[['Età', 'Durata_Abbonamento', 'Tariffa', 'GB_Usati', 'Servizio_Clienti_usato']].corr(method= "kendall")
         print("La correlazione col metodo kendal è :")
         print(correlazione)
     
@@ -108,7 +109,7 @@ class Operatore:
         print("La conversione è :")
         print(self.trasformato)
     
-    def normalizzare(self):
+    def normalizzare(self):#30 minuti per cercare di capire
         lista=["Età","Durata_Abbonamento","GB_Usati","Servizio_Clienti_usato"]
         for elemento in lista:
             valore_minimo=self.trasformato[elemento].min()
@@ -122,7 +123,7 @@ class Operatore:
     
 
     
-
+#1 ora per fare il menù e i dovuti controlli
 print("Menù:")
 print("1)Carica e visualizza dati")
 print("2)Crea un file CSV con questi dati")
@@ -242,6 +243,11 @@ while True:
             print("Devi creare prima il file")
         else:
             operatore.normalizzare()
+    elif scelta=="14":
+        print("Grazie per l'uso")
+        break
+    else:
+        ("Errore")
         
 
         
