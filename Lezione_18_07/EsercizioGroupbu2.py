@@ -1,24 +1,19 @@
 import pandas as pd
 import numpy as nd
 
-"""citta=["Napoli","Roma","Torino","Milano","Genova","Palermo","Bologna","Firenze","Venezia","Verona"]
+citta=["Napoli","Roma","Torino","Milano","Genova","Palermo","Bologna","Firenze","Venezia","Verona"]
 prodotti=['Tastiera', 'Mouse',"Monitor","Cuffie","Casse"]
 data=['2021-01-01', '2021-02-01']
 vendite=nd.random.randint(1,100,size=10)
-costi=nd.random.randint(1,10,size=10)"""
+costi=nd.random.randint(1,10,size=10)
 class Prodotto:
-    citta=["Napoli","Roma","Torino","Milano","Genova","Palermo","Bologna","Firenze","Venezia","Verona"]
-    prodotti=['Tastiera', 'Mouse',"Monitor","Cuffie","Casse"]
-    data=['2021-01-01', '2021-02-01']
-    vendite=nd.random.randint(1,100,size=10)
-    costi=nd.random.randint(1,10,size=10)
-
-    def __init__(self):
-        self.citta=Prodotto.citta
-        self.prodotti=Prodotto.prodotti
-        self.data=Prodotto.data
-        self.vendite=Prodotto.vendite
-        self.costi=Prodotto.vendite
+    
+    def __init__(self,citta,prodotti,data,vendite,costi):
+        self.citta=citta
+        self.prodotti=prodotti
+        self.data=data
+        self.vendite=vendite
+        self.costi=costi
 
     def crea(self):
         data = {
@@ -43,7 +38,7 @@ class Prodotto:
         print(pivot_unito)
 
 
-negozio= Prodotto()
+negozio= Prodotto(citta, prodotti, data, vendite, costi)
 negozio.crea()
 negozio.unisci()
 negozio.pivot()
