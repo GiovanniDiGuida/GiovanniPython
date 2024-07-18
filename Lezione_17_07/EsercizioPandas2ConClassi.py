@@ -27,6 +27,7 @@ class Negozio:
     def raggruppa_per_prodotto(self):
         self.gruppo = self.negozio.groupby("Prodotti")["Quantità"].sum()
         print(self.gruppo)
+        
     
     def più_venduto(self):
         venduto=self.gruppo.idxmax()
@@ -50,26 +51,7 @@ class Negozio:
         ordinato=self.negozio.groupby("Città")["Quantità"].sum()
         print(ordinato)
 
- #Ho provato a farlo con una classe figlia ma da errore e non riesco a risolvere   
-"""class Prodotto(Negozio):
-    def __init__(self):
-        super().__init__()
-        self.prodotti_vendite=self.negozio["Prezzo"]*self.negozio["Quantità"]
-    
-    def totale_vendite(self):
-        self.negozio["Totale Vendite"]= self.prodotti_vendite
-        print(self.negozio)
-    
-    def vendite_superiori(self):
-        venduto=pd.DataFrame(self.negozio)
-        vendite_maggiori=venduto[venduto["Totale Vendite"] > 40]
-        print(vendite_maggiori)
-    
-    
-    def decrescente(self):
-        negozio_ordinato = self.negozio.sort_values(by="Totale Vendite")
-        negozio_ordinato_decrescente=negozio_ordinato[::-1]
-        print(negozio_ordinato_decrescente)"""
+
 
 
 print("You shall not Pass")
@@ -84,8 +66,8 @@ print("7)Ordina per vendite totali in ordine decrescente")
 print("8)Visualizza il numero di vendite per ogni città")
 print("9)Esci")
 negozio=None
-gruppo=None
-"""totale=None"""
+"""gruppo=None"""
+
 while True:
     scelta=input("Cosa vuoi fare?: ")
     if scelta=="1":
@@ -100,12 +82,12 @@ while True:
         if negozio is None:
             print("devi creare il dizionario")
         else:
-            gruppo=negozio.raggruppa_per_prodotto()
+            negozio.raggruppa_per_prodotto()
     elif scelta=="4":
-        if negozio is None or gruppo is None:
+        if negozio is None :
             print("devi creare il dizionario o aggiornare il dizionario con 'Totali Vendite'")
         else:
-            gruppo.più_venduto()
+            negozio.più_venduto()
     elif scelta=="5":
         if negozio is None:
             print("devi creare il dizionario")
