@@ -86,6 +86,34 @@ class Operatore:
     def groupChurn(self):#1min
         relazione_churn=self.trasformato.groupby("Churn")
         print(relazione_churn)
+    
+    def correlazione(self):#15 min per capire un minimo cosa sia la correlazione
+        correlazione=self.trasformato.corr()
+        print("La correlazione è :")
+        print(correlazione)
+    
+    def correlazione_kendal(self):#15 min per capire un minimo cosa sia la correlazione
+        correlazione=self.trasformato.corr(method="kendall")
+        print("La correlazione col metodo kendal è :")
+        print(correlazione)
+    
+    def correlazione_spearman(self):#15 min per capire un minimo cosa sia la correlazione
+        correlazione=self.trasformato.corr(method= "spearman", min_periods = 2)
+        print("La correlazione col metodo Spearman è :")
+        print(correlazione)
+    
+    def sostituisci_Churn(self):#10 minuti per cercare il metodo
+        self.trasformato['Churn'] = self.trasformato['Churn'].map({'No': 0, 'Si': 1})
+        print("La conversione è :")
+        print(self.trasformato)
+    
+    def normalizzare(self):
+        lista=["Età","Durata_Abbonamento","GB_Usati","Servizio_Clienti_usato"]
+        for elemento in lista:
+            valore_minimo=self.trasformato.min()
+            valore_massimo=self.trasformato.max()
+            self.trasformato[elemento]=(self.trasformato[elemento]- valore_minimo)/(valore_massimo-valore_minimo)
+        print(self.trasformato)
 
         
 
@@ -103,18 +131,21 @@ print("5)Elimina i singoli valori nulli")
 print("6)Visualizza il costo per GB")
 print("7)Visualizza la relazione tra Età, Durata_Abonnamento, Tariffa e la Churn")
 print("8)Elimina errori di Tariffa")
-print("9)Esci")
+print("9)Mostra la correlazione tra gli elementi")
+print("10)Mostra la correlazione con metodo Kendal")
+print("11)Mostra la correlazione con metodo Spearman")
+print("12)Convertire la colonna Churn in formato numerico")
+print("13)Normalizza")
+print("14)Esci")
 
 
 operatore=None
 while True:
     scelta=input("Cosa vuoi fare?: ")
     if scelta=="1":
-        if operatore is None:
-            print("Devi creare prima il file")
-        else:
-            operatore=Operatore(citta,nomi,eta,durata_abbonamento,tariffa,dati_consumati_GB,servizio_clienti,churn)
-            operatore.costruisci()
+    
+        operatore=Operatore(citta,nomi,eta,durata_abbonamento,tariffa,dati_consumati_GB,servizio_clienti,churn)
+        operatore.costruisci()
     elif scelta=="2":
         if operatore is None:
             print("Devi creare prima il file")
@@ -186,6 +217,35 @@ while True:
         else:
             operatore.errori()
     elif scelta=="9":
+        if operatore is None:
+            print("Devi creare prima il file")
+        else:
+            operatore.correlazione()
+    elif scelta=="10":
+        if operatore is None:
+            print("Devi creare prima il file")
+        else:
+            operatore.correlazione_kendal()
+    elif scelta=="11":
+        if operatore is None:
+            print("Devi creare prima il file")
+        else:
+            operatore.correlazione_spearman()
+    elif scelta=="12":
+        if operatore is None:
+            print("Devi creare prima il file")
+        else:
+            operatore.sostituisci_Churn()
+    elif scelta=="13":
+        if operatore is None:
+            print("Devi creare prima il file")
+        else:
+            operatore.normalizzare()
+        
+
+        
+
+
 
 
 
