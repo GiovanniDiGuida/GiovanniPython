@@ -49,7 +49,8 @@ class Negozio:
     def ordinaPerCittà(self):
         ordinato=self.negozio.groupby("Città")["Quantità"].sum()
         print(ordinato)
-    
+
+ #Ho provato a farlo con una classe figlia ma da errore e non riesco a risolvere   
 """class Prodotto(Negozio):
     def __init__(self):
         super().__init__()
@@ -124,7 +125,7 @@ while True:
         if negozio is None:
             print("devi creare il dizionario")
         else:
-            negozio.decrescente()
+            negozio.ordinaPerCittà()
     elif scelta=="9":
         print("Grazie per l'uso")
         break
