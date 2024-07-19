@@ -23,11 +23,22 @@ categorie=["Media", "Massimo", "Minimo", "Mediana"]
 valori=[media,massimo,minimo,mediana]
 colori=["blue","red","yellow","green"]
 
-plt.figure()
+"""plt.figure()
 plt.bar(categorie, valori, color=colori)
 plt.title("Dati temperatura")
 plt.xlabel("Tipo di dato")
 plt.ylabel('Valori')
+plt.show()"""
+
+x = categorie
+y = valori
+colori=["blue","red","yellow","yellow","black","green"]
+plt.figure()
+plt.scatter(x, y, color=np.random.choice(colori, len(x)))
+plt.title("Dati temperatura")
+plt.xlabel("Tipo di dato")
+plt.ylabel('Valori')
+
 plt.show()
 
 
