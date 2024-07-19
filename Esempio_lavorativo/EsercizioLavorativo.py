@@ -3,12 +3,12 @@ import numpy as nd
 
 
 #Qui ci sono tutte le info per creare il dizionario(15min per farlo)
-citta=["Napoli","Roma","Torino","Milano","Genova","Palermo","Bologna","Firenze","Venezia","Verona"]
+citta=["Napoli","Roma","Torino","Milano","Genova","Palermo","Bologna","Firenze","Venezia","Verona","Parigi","Atene","Tirana",]
 nomi=["Giovanni","Andrea","Davide","Matteo","Lorenzo","Daniele","Amalia","Antonio","Valentina","Giacomo","Teresa","Danilo","Mirko","Tommaso","Salvatore"]
-eta=nd.random.randint(18,80,size=30)
-durata_abbonamento=nd.random.randint(1,12,size=30)
+eta=nd.random.randint(-10,80,size=30)
+durata_abbonamento=nd.random.randint(1,20,size=30)
 tariffa=[10,15,20,25,50,100]
-dati_consumati_GB=nd.random.randint(1,5,size=30)
+dati_consumati_GB=nd.random.randint(1,10,size=30)
 servizio_clienti=nd.random.randint(1,10,size=30)
 churn=["Si","No"]
 
@@ -64,8 +64,12 @@ class Operatore:
         print(pulito)
     
     def errori(self):
+        #città_giuste=["Napoli","Roma","Torino","Milano","Genova","Palermo","Bologna","Firenze","Venezia","Verona"]
         tariffa_corretta=[5,10,15,20]
         self.trasformato[self.trasformato["Tariffa"] > 25]= nd.random.choice(tariffa_corretta)
+        self.trasformato[self.trasformato["Età"]< 10]= nd.random.randint(18,80)
+        #if self.trasformato["Città"] is not  città_giuste:
+            #self.trasformato[self.trasformato["Città"]]= nd.random.choice(città_giuste)
         print(self.trasformato)
     
     def costo_per_GB(self):#5 min
@@ -94,9 +98,10 @@ class Operatore:
         print("La correlazione è :")
         print(correlazione)
     
-    def correlazione_ken(self):#15 min per capire un minimo cosa sia la correlazione
-        correlazione=self.trasformato[['Età', 'Durata_Abbonamento', 'Tariffa', 'GB_Usati', 'Servizio_Clienti_usato']].corr(method= "kendall")
-        print("La correlazione col metodo kendal è :")
+    def correlazione_pearson(self):#15 min per capire un minimo cosa sia la correlazione
+        
+        correlazione=self.trasformato[['Età', 'Durata_Abbonamento', 'Tariffa', 'GB_Usati', 'Servizio_Clienti_usato']].corr(method= "pearson",numeric_only = True)
+        print("La correlazione col metodo pearson è :")
         print(correlazione)
     
     def correlazione_spearman(self):#15 min per capire un minimo cosa sia la correlazione
@@ -132,9 +137,9 @@ print("4)Elimina righe con valori nulli")
 print("5)Elimina i singoli valori nulli")
 print("6)Visualizza il costo per GB")
 print("7)Visualizza la relazione tra Età, Durata_Abonnamento, Tariffa e la Churn")
-print("8)Elimina errori di Tariffa")
+print("8)Elimina errori di Tariffa e Età")
 print("9)Mostra la correlazione tra gli elementi")
-print("10)Mostra la correlazione con metodo Kendal")
+print("10)Mostra la correlazione con metodo Pearson")
 print("11)Mostra la correlazione con metodo Spearman")
 print("12)Convertire la colonna Churn in formato numerico")
 print("13)Normalizza")
@@ -227,7 +232,7 @@ while True:
         if operatore is None:
             print("Devi creare prima il file")
         else:
-            operatore.correlazione_ken()
+            operatore.correlazione_pearson()
     elif scelta=="11":
         if operatore is None:
             print("Devi creare prima il file")
