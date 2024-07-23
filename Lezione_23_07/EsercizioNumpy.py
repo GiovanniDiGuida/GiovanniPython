@@ -5,7 +5,7 @@ import numpy as np
 - calcolo della deviazione standard;
 - trasformarlo in un array 5x10"""
 
-arr=np.random.randint(1,1000, size=50)
+arr=np.random.randint(1,1001, size=50)
 
 class Array:
 
@@ -34,10 +34,28 @@ class Array:
         print("L'array trasformato è: ")
         print(arr)
 
-oggetto=Array(arr)
-oggetto.mostra()
-oggetto.media()
-oggetto.deviazione()
-oggetto.trasforma()
+
+print("Menù: ")
+print("1)Crea e mostra array")
+print("2)Mostra media")
+print("3)Mostra deviazione standard")
+print("4)Trasforma in un array 5x10")
+print("5)Esci")
+
+while True:
+    scelta=input("Cosa vuoi fare?: ")
+    if scelta=="1":
+        oggetto=Array(arr)
+        oggetto.mostra()
+    elif scelta=="2":
+        oggetto.media()
+    elif scelta=="3":
+
+        oggetto.deviazione()
+    elif scelta=="4":
+        oggetto.trasforma()
+    elif scelta=="5":
+        print("Grazie per l'uso")
+        break
 
     
