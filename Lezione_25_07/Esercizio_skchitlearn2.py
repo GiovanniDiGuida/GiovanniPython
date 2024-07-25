@@ -17,7 +17,7 @@ X=dati[["età"]]
 y=dati["calories"]
 X_train, X_test, y_train, y_test = train_test_split(X, y)
 modello = LinearRegression()
-modello.fit(X_test, y_test)
+modello.fit(X_train, y_train)
 y_pred=modello.predict(X_test)
 
 plt.scatter(X_test, y_test, color="black")
